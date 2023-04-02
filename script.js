@@ -1,25 +1,42 @@
 const cardContainer = document.querySelector('.card-container');
 const cards = document.querySelectorAll('.card');
 
-cards.forEach(card => {
-    card.addEventListener('focus', (event) => {
-        const isFocusedWithKeyboard = event.target.matches(':focus-visible');
-        isFocusedWithKeyboard && card.scrollIntoView({ inline: 'center', behavior: 'smooth' });
-    });
-});
-
-window.addEventListener('resize', () => {
-    handleDrag();
-});
-
 let mouseDown = false;
 let mouseDownLastPositionX = 0;
 let cardContainerTransformX = 0;
 let mouseMoveLastXPosition = 0;
 
-const handleMouseDown = (event) => {
-    cardContainer.style.cursor = 'grab';
 
+cards.forEach((card, index) => {
+    card.addEventListener('focus', (event) => {
+        const isFocusedWithKeyboard = event.target.matches(':focus-visible');
+        // isFocusedWithKeyboard && card.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+
+        const cardIndex = index ?? index + 1;
+        const cardContainerGap = parseInt(window.getComputedStyle(cardContainer).getPropertyValue('margin'));
+        let translateValueX = cardIndex * (card.clientWidth + cardContainerGap - 64)
+
+        // Don't allow to drag out ouf right side bounds.
+        const rightSideFurthestCoordinates = cardContainer.offsetWidth - window.innerWidth;
+
+        // Total card container side margin values.
+        const cardContainerSideMargin = parseInt(window.getComputedStyle(cardContainer).getPropertyValue('margin')) * 2;
+
+        const hasDraggedOutOfRightSideBounds = Math.abs(translateValueX) > rightSideFurthestCoordinates + cardContainerSideMargin;
+
+        if (isFocusedWithKeyboard) {
+            if (hasDraggedOutOfRightSideBounds) {
+                translateValueX = rightSideFurthestCoordinates + cardContainerSideMargin;
+            }
+
+            cardContainer.style.transform = `translateX(${-translateValueX}px)`;
+        }
+    });
+});
+
+window.addEventListener('resize', () => handleDrag());
+
+const handleMouseDown = (event) => {
     mouseDown = true;
     mouseDownLastPositionX = event.pageX;
 
@@ -36,15 +53,13 @@ const handleMouseMove = (event) => {
     mouseMoveLastXPosition = event.pageX;
 };
 
-const handleMouseUp = () => {
-    cardContainer.style.cursor = 'pointer';
-    mouseDown = false;
-};
+const handleMouseUp = () => mouseDown = false;
 
 const handleDrag = (eventPageX = 0) => {
     let mouseMoveDifference = mouseDownLastPositionX;
 
-    // When eventPageX is set that menus that the
+    // When eventPageX is provided it means that the dragging action is being handled.
+    // Otherwise, the window resize position reset is being handled.
     if (eventPageX) {
         mouseMoveDifference = eventPageX - mouseDownLastPositionX;
     }
