@@ -1,0 +1,83 @@
+:root {
+    --background-color-primary: #fff;
+
+    --border-color-primary: rgba(0, 0, 0, 0.15);
+    --border-color-focus-primary: rgba(2, 5, 154, 0.2);
+
+    --focus-color-primary: #0000c0;
+
+    --font-family-content: 'Inter', sans-serif;
+
+
+    --box-shadow-hover-primary: 0 5px 12px rgba(0, 0, 0, .08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Resets 1rem from 16px to 10px */
+    font-size: 62.5%;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: var(--font-family-content);
+    background-color: var(--background-color-primary);
+}
+
+.card-container {
+    display: inline-flex;
+    column-gap: 2.4rem;
+    margin: 2.4rem;
+    user-select: none;
+    touch-action: none;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    background-color: var(--background-color-primary);
+
+    min-width: 28rem;
+    height: 40rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-primary);
+
+    font-size: 2rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card:hover {
+    user-select: none;
+    border: 2px solid transparent;
+    box-shadow: var(--box-shadow-hover-primary);
+}
+
+.card:active {
+    user-select: none;
+    transform: scale(1.05);
+}
+
+.card:focus-visible {
+    transform: scale(1.05);
+}
+
+@media only screen and (max-width: 768px) {
+    html {
+        font-size: 50%;
+    }
+}
