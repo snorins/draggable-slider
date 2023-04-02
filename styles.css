@@ -1,13 +1,6 @@
 :root {
     --background-color-primary: #fff;
-
-    --border-color-primary: rgba(0, 0, 0, 0.15);
-    --border-color-focus-primary: rgba(2, 5, 154, 0.2);
-
-    --focus-color-primary: #0000c0;
-
     --font-family-content: 'Inter', sans-serif;
-
     --box-shadow-hover-primary: rgba(50, 50, 93, 0.25) 0 13px 27px -5px, rgba(0, 0, 0, 0.3) 0 8px 16px -8px;
 }
 
@@ -76,11 +69,6 @@ body {
     user-select: none;
     box-shadow: var(--box-shadow-hover-primary);
     transform: scale(1.05);
-}
-
-.card:focus-visible {
-    transform: scale(1.05);
-    box-shadow: var(--box-shadow-hover-primary);
 }
 
 @media only screen and (max-width: 768px) {
