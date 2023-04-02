@@ -6,30 +6,43 @@ let mouseDownLastPositionX = 0;
 let cardContainerTransformX = 0;
 let mouseMoveLastXPosition = 0;
 
+// ms
+const slowDownTabTime = 300;
+let canFocusWithTab = true;
+
 
 cards.forEach((card, index) => {
     card.addEventListener('focus', (event) => {
         const isFocusedWithKeyboard = event.target.matches(':focus-visible');
-        // isFocusedWithKeyboard && card.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+
+        if (!canFocusWithTab) {
+            return;
+        }
 
         const cardIndex = index ?? index + 1;
-        const cardContainerGap = parseInt(window.getComputedStyle(cardContainer).getPropertyValue('margin'));
+        const cardContainerGap = parseInt(window.getComputedStyle(cardContainer).getPropertyValue('gap').split(' ')[1]);
         let translateValueX = cardIndex * (card.clientWidth + cardContainerGap - 64)
 
         // Don't allow to drag out ouf right side bounds.
-        const rightSideFurthestCoordinates = cardContainer.offsetWidth - window.innerWidth;
 
-        // Total card container side margin values.
+        // Total card container side margins.
         const cardContainerSideMargin = parseInt(window.getComputedStyle(cardContainer).getPropertyValue('margin')) * 2;
 
-        const hasDraggedOutOfRightSideBounds = Math.abs(translateValueX) > rightSideFurthestCoordinates + cardContainerSideMargin;
+        const rightSideFurthestCoordinates = cardContainer.offsetWidth - window.innerWidth + cardContainerSideMargin;
+        const hasDraggedOutOfRightSideBounds = translateValueX >= rightSideFurthestCoordinates;
 
+        console.log(rightSideFurthestCoordinates);
+
+        console.log(translateValueX, hasDraggedOutOfRightSideBounds, rightSideFurthestCoordinates);
         if (isFocusedWithKeyboard) {
             if (hasDraggedOutOfRightSideBounds) {
-                translateValueX = rightSideFurthestCoordinates + cardContainerSideMargin;
+                translateValueX = rightSideFurthestCoordinates;
             }
 
             cardContainer.style.transform = `translateX(${-translateValueX}px)`;
+
+            canFocusWithTab = false;
+            setTimeout(() => canFocusWithTab = true, slowDownTabTime);
         }
     });
 });
@@ -48,9 +61,9 @@ const handleMouseDown = (event) => {
     }
 };
 
-const handleMouseMove = (event) => {
-    mouseDown && handleDrag(event.pageX);
-    mouseMoveLastXPosition = event.pageX;
+const handleMouseMove = ({ pageX }) => {
+    mouseDown && handleDrag(pageX);
+    mouseMoveLastXPosition = pageX;
 };
 
 const handleMouseUp = () => mouseDown = false;

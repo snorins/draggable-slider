@@ -38,6 +38,12 @@ body {
     transition: all .2s ease-in-out;
 }
 
+@media (any-pointer: coarse) {
+    .card-container {
+        transition: none;
+    }
+}
+
 .card-container:focus,
 .card-container:active {
     transition: none;
