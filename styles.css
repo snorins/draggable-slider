@@ -25,21 +25,9 @@ body {
 .card-container {
     display: inline-flex;
     column-gap: 2.4rem;
-    margin: 2.4rem;
+    margin: 3.6rem;
     user-select: none;
     touch-action: none;
-    transition: all .2s ease-in-out;
-}
-
-@media (any-pointer: coarse) {
-    .card-container {
-        transition: none;
-    }
-}
-
-.card-container:focus,
-.card-container:active {
-    transition: none;
 }
 
 .card {

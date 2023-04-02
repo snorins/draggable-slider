@@ -1,5 +1,4 @@
 const cardContainer = document.querySelector('.card-container');
-const cards = document.querySelectorAll('.card');
 
 let mouseDown = false;
 let mouseDownLastPositionX = 0;
@@ -8,7 +7,7 @@ let mouseMoveLastXPosition = 0;
 
 window.addEventListener('resize', () => handleDrag());
 
-const handleMouseDown = (event) => {
+const handleGestureDown = (event) => {
     mouseDown = true;
     mouseDownLastPositionX = event.pageX;
 
@@ -20,12 +19,14 @@ const handleMouseDown = (event) => {
     }
 };
 
-const handleMouseMove = ({ pageX }) => {
+const handleGestureMove = ({ pageX }) => {
     mouseDown && handleDrag(pageX);
     mouseMoveLastXPosition = pageX;
 };
 
-const handleMouseUp = () => mouseDown = false;
+const handleGestureUp = () => mouseDown = false;
+
+const handleGestureLeave = () => mouseDown = false;
 
 const handleDrag = (eventPageX = 0) => {
     let mouseMoveDifference = mouseDownLastPositionX;
@@ -57,18 +58,18 @@ const handleDrag = (eventPageX = 0) => {
     }
 
     cardContainer.style.transform = `translateX(${translateValueX}px)`;
-}
+};
 
 
 if (window.PointerEvent) {
-    cardContainer.addEventListener('pointerdown', handleMouseDown);
-    cardContainer.addEventListener('pointermove', handleMouseMove);
-    cardContainer.addEventListener('pointerup', handleMouseUp);
-    cardContainer.addEventListener('pointerleave', handleMouseUp);
+    cardContainer.addEventListener('pointerdown', handleGestureDown);
+    cardContainer.addEventListener('pointermove', handleGestureMove);
+    cardContainer.addEventListener('pointerup', handleGestureUp);
+    cardContainer.addEventListener('pointerleave', handleGestureLeave);
 } else {
-    cardContainer.addEventListener('mousedown', handleMouseDown);
-    cardContainer.addEventListener('mousemove', handleMouseMove);
-    cardContainer.addEventListener('mouseup', handleMouseUp);
-    cardContainer.addEventListener('mouseleave', handleMouseUp);
+    cardContainer.addEventListener('mousedown', handleGestureDown);
+    cardContainer.addEventListener('mousemove', handleGestureMove);
+    cardContainer.addEventListener('mouseup', handleGestureUp);
+    cardContainer.addEventListener('mouseleave', handleGestureLeave);
 }
 
