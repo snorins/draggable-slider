@@ -7,7 +7,7 @@ let cardContainerTransformX = 0;
 let mouseMoveLastXPosition = 0;
 
 // ms
-const slowDownTabTime = 300;
+const slowDownTabTime = 500;
 let canFocusWithTab = true;
 
 
