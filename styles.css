@@ -1,6 +1,7 @@
 :root {
     --background-color-primary: #fff;
     --font-family-content: 'Inter', sans-serif;
+    --font-family-title: 'Poppins', sans-serif;
     --box-shadow-hover-primary: rgba(50, 50, 93, 0.25) 0 13px 27px -5px, rgba(0, 0, 0, 0.3) 0 8px 16px -8px;
 }
 
@@ -17,9 +18,32 @@ html {
 
 body {
     height: 100vh;
-    overflow: hidden;
     font-family: var(--font-family-content);
     background-color: var(--background-color-primary);
+}
+
+.global-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    padding: 0 3.8rem;
+    height: 84px;
+    background-color: var(--background-color-primary);
+    box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
+}
+
+.global-header h1 {
+    font-family: var(--font-family-title);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.list-wrapper {
+    overflow-x: hidden;
 }
 
 .card-container {
@@ -59,8 +83,20 @@ body {
     transform: scale(1.05);
 }
 
+.category-title {
+    font-family: var(--font-family-title);
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin: 4.8rem 3.8rem 0;
+}
+
 @media only screen and (max-width: 768px) {
     html {
         font-size: 50%;
     }
+}
+
+/* Helpers */
+.mt-2xl {
+    margin-top: 8.4rem;
 }
