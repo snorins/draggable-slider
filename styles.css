@@ -58,7 +58,12 @@ body {
 }
 
 .language-switcher:hover .language-switcher-content {
-   display: block;
+    display: block;
+}
+
+.language-switcher:hover .expand-more-icon {
+    transition: all 0.2s ease-in-out;
+    transform: rotate(180deg);
 }
 
 .language-switcher-content {
@@ -68,7 +73,7 @@ body {
     position: absolute;
     top: 58px;
     left: -24px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
+    box-shadow: var(--box-shadow-border-primary);
 }
 
 .list-wrapper {
