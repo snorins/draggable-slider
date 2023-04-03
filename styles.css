@@ -3,6 +3,7 @@
     --font-family-content: 'Inter', sans-serif;
     --font-family-title: 'Poppins', sans-serif;
     --box-shadow-hover-primary: rgba(50, 50, 93, 0.25) 0 13px 27px -5px, rgba(0, 0, 0, 0.3) 0 8px 16px -8px;
+    --box-shadow-border-primary: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
 }
 
 * {
@@ -29,6 +30,7 @@ body {
     z-index: 10;
 
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 3.8rem;
     height: 78px;
@@ -40,6 +42,33 @@ body {
     font-family: var(--font-family-title);
     font-size: 1.6rem;
     font-weight: 400;
+}
+
+.global-header div {
+    font-size: 1.6rem;
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 4px;
+    cursor: pointer;
+    height: 100%;
+}
+
+.language-switcher:hover .language-switcher-content {
+   display: block;
+}
+
+.language-switcher-content {
+    display: none;
+    padding: 1.2rem 2.4rem;
+    background-color: var(--background-color-primary);
+    position: absolute;
+    top: 58px;
+    left: -24px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
 }
 
 .list-wrapper {
@@ -99,4 +128,8 @@ body {
 /* Helpers */
 .mt-2xl {
     margin-top: 6.4rem;
+}
+
+.spacer {
+    height: 9.6rem;
 }
