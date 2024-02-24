@@ -1,4 +1,4 @@
 # Draggable Slider
-<a href="https://janisjuniors.github.io/Draggable-Slider">Draggable mobile friendly slider</a> made with vanilla js.
+<a href="https://janisjuniors.github.io/draggable-slider">Draggable mobile friendly slider</a> made with vanilla js.
 
 <img src="https://user-images.githubusercontent.com/104723218/229374803-4bde6195-30a5-44a2-8b89-90a1d1457be0.png" alt="Slider preview" width="80%">
